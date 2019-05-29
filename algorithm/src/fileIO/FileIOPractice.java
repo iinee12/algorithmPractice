@@ -11,17 +11,21 @@ public class FileIOPractice {
 
 	public static void main(String[] args) {
 		
-		String path = FileIOPractice.class.getResource("").getPath();    //ÀÚ¹Ù´Â »ó´ë°æ·Î¸¦ ºÎ¸£±â ¾î·Á¿ö ÇöÀç Å¬·¡½ºÀÇ Àı´ë °æ·Î¸¦ °¡Á®¿Â´Ù.
+		String path = FileIOPractice.class.getResource("").getPath();    //ìë°”ëŠ” ìƒëŒ€ê²½ë¡œë¥¼ ë¶€ë¥´ê¸° ì–´ë ¤ì›Œ í˜„ì¬ í´ë˜ìŠ¤ì˜ ì ˆëŒ€ ê²½ë¡œë¥¼ ê°€ì ¸ì˜¨ë‹¤.
 		
-		File directory = new File(path+"//INPUT");  // »ó´ë°æ·Î·Î ÆÄÀÏ °´Ã¼ »ı¼º
+		//Scanner scan = new Scanner(System.in);  //ìë°” ì…ë ¥ë°›ê¸°
+		//String message = "";
+		//message = scan.nextLine();
 		
-		File[] fList = directory.listFiles(); //ÇØ´ç °æ·Î¿¡ ÀÖ´Â ÆÄÀÏÀ» ¹è¿­·Î °¡Á®¿À±â
+		File directory = new File(path+"//INPUT");  // ìƒëŒ€ê²½ë¡œë¡œ íŒŒì¼ ê°ì²´ ìƒì„±
+		
+		File[] fList = directory.listFiles(); //í•´ë‹¹ ê²½ë¡œì— ìˆëŠ” íŒŒì¼ì„ ë°°ì—´ë¡œ ê°€ì ¸ì˜¤ê¸°
 		
 		for( File file : fList ) {
-			System.out.println( file.getName() );  //file.getName() ÆÄÀÏ ÀÌ¸§À» °¡Á®¿Â´Ù.
-			System.out.println( file.length() );   //file.length() ÆÄÀÏÀÇ Å©±â¸¦ °¡Á®¿Â´Ù. ´ÜÀ§´Â byte
+			System.out.println( file.getName() );  //file.getName() íŒŒì¼ ì´ë¦„ì„ ê°€ì ¸ì˜¨ë‹¤.
+			System.out.println( file.length() );   //file.length() íŒŒì¼ì˜ í¬ê¸°ë¥¼ ê°€ì ¸ì˜¨ë‹¤. ë‹¨ìœ„ëŠ” byte
 			
-			if ( file.length() > 2048 ) {  //2MB°¡ ³Ñ´Â ÆÄÀÏÀº OUTPUT Æú´õ¿¡ º¹»ç
+			if ( file.length() > 2048 ) {  //2MBê°€ ë„˜ëŠ” íŒŒì¼ì€ OUTPUT í´ë”ì— ë³µì‚¬
 				CopyFiles(file.getName());
 			}
 			
@@ -37,7 +41,7 @@ public class FileIOPractice {
 		try {
 			File finalFolder = new File("./OUTPUT");
 			
-			// µğ·ºÅä¸®°¡ Á¸ÀçÇÏ´ÂÁö °Ë»çÇØ¼­ ¾øÀ¸¸é ¸¸µé±â
+			// ë””ë ‰í† ë¦¬ê°€ ì¡´ì¬í•˜ëŠ”ì§€ ê²€ì‚¬í•´ì„œ ì—†ìœ¼ë©´ ë§Œë“¤ê¸°
 			if( !finalFolder.exists() ) {
 				finalFolder.mkdir();
 			}
@@ -47,11 +51,11 @@ public class FileIOPractice {
 			
 			byte[] buffer = new byte[BUFFER_SIZE];
 			
-			while ( (readLen = input.read(buffer)) !=-1 ) {  //readLen¿¡ buffer array¸¸Å­ ÀĞ¾î¼­ ³Ö´Â´Ù. ´õÀÌ»ó input ½ºÆ®¸²ÀÌ ¾øÀ¸¸é -1 ¹İÈ¯
-				output.write(buffer, 0, readLen);  //buffer¿¡ 0ºÎÅÍ ½ÃÀÛÇØ¼­ readLen¸¸Å­ output ½ºÆ®¸²À» °è¼Ó ¾´´Ù.
+			while ( (readLen = input.read(buffer)) !=-1 ) {  //readLenì— buffer arrayë§Œí¼ ì½ì–´ì„œ ë„£ëŠ”ë‹¤. ë”ì´ìƒ input ìŠ¤íŠ¸ë¦¼ì´ ì—†ìœ¼ë©´ -1 ë°˜í™˜
+				output.write(buffer, 0, readLen);  //bufferì— 0ë¶€í„° ì‹œì‘í•´ì„œ readLenë§Œí¼ output ìŠ¤íŠ¸ë¦¼ì„ ê³„ì† ì“´ë‹¤.
 			}
 			
-			//ÀÚ¿ø ¹İÈ¯
+			//ìì› ë°˜í™˜
 			input.close();
 			output.close();
 			
