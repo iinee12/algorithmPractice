@@ -11,14 +11,15 @@ public class FileIOPractice {
 
 	public static void main(String[] args) {
 		
-		String path = FileIOPractice.class.getResource("").getPath();    //자바는 상대경로를 부르기 어려워 현재 클래스의 절대 경로를 가져온다.
-		
 		//Scanner scan = new Scanner(System.in);  //자바 입력받기
 		//String message = "";
 		//message = scan.nextLine();
 		
-		File directory = new File(path+"//INPUT");  // 상대경로로 파일 객체 생성
+		File directory = new File("./INPUT");  // 상대경로로 ./이면 프로젝트 기준 최상위다
 		
+		
+		
+		//여러개의 파일로 지랄할때
 		File[] fList = directory.listFiles(); //해당 경로에 있는 파일을 배열로 가져오기
 		
 		for( File file : fList ) {
@@ -31,6 +32,18 @@ public class FileIOPractice {
 			
 		}
 		
+		
+		//단일파일 하나로 
+		FileReader filereader = new FileReader(file);
+                //입력 버퍼 생성
+                BufferedReader bufReader = new BufferedReader(filereader);
+                String line = "";
+                while((line = bufReader.readLine()) != null){
+                   System.out.println(line);
+                }
+                //.readLine()은 끝에 개행문자를 읽지 않는다.            
+                bufReader.close();
+
 
 	}
 	
