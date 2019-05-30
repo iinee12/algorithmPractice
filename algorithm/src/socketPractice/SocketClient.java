@@ -11,10 +11,27 @@ public class SocketClient {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		// TODO Auto-generated method stub
 		
-		Socket s = new Socket("³ªÀÇ IP", 9090);
-		BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));  //buffer¿¡ ¼ÒÄÏÀÇ input ½ºÆ®¸²À» ´ã´Â´Ù.
+		Socket s = new Socket("ë‚˜ì˜ IP", 9090);
+		BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));  //bufferì— ì†Œì¼“ì˜ input ìŠ¤íŠ¸ë¦¼ì„ ë‹´ëŠ”ë‹¤.
 		String answer = input.readLine();
 		System.out.println(answer);
+		
+		
+		
+		//íŒŒì¼ ë³´ë‚´ê¸°
+		
+		java.io.OutputStream out = s.getOutputStream()
+		byte[] buffer = new byte[4096];
+		int readLen;
+		FileInputStream inputStream = new FileInputStream(íŒŒì¼ê²½ë¡œ);
+		
+		while( (readLen=inputStream.read(buffer)) !=-1 ){
+			out.write(buffer,0,readLen);
+		}
+		inputStream.close();
+		
+		
+		
 		
 	}
 
